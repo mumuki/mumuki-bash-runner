@@ -1,15 +1,16 @@
 class BashMetadataHook < Mumukit::Hook
   def metadata
     {language: {
-        name: '...',
-        version: '...',
-        extension: '...',
-        ace_mode: '...'
+        name: 'bash',
+        icon: {type: 'devicon', name: 'bash'},
+        version: '4.3.48(1)-release',
+        extension: 'sh',
+        ace_mode: 'bassh',
+        prompt: '$'
     },
      test_framework: {
-         name: '...',
-         version: '...',
-         test_extension: '...'
+         name: 'metatest',
+         test_extension: 'yml'
      }}
   end
 end
