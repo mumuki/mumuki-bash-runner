@@ -5,7 +5,7 @@ class BashMetadataHook < Mumukit::Hook
         icon: {type: 'devicon', name: 'bash'},
         version: '4.3.48(1)-release',
         extension: 'sh',
-        ace_mode: 'bassh',
+        ace_mode: 'bash',
         prompt: '$'
     },
      test_framework: {
