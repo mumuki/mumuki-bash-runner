@@ -1,4 +1,5 @@
 FROM ubuntu
 MAINTAINER mumuki
-
-# Declare your dockerfile here
+RUN apt-get update && \
+    apt-get install git -y && \
+    rm -rf /var/lib/apt/lists/*
