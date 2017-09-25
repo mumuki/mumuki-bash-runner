@@ -10,17 +10,12 @@ describe 'runner' do
   end
   after(:all) { Process.kill 'TERM', @pid }
 
-  it 'sample test' do
-    response = bridge.run_tests!(test: '...',
-                                 extra: '...',
-                                 content: '...',
-                                 expectations: [])
+  it 'answers the right git version' do
+    response = bridge.run_query!(extra: '',
+                                 content: '',
+                                 query: 'git --version | grep "git version 2 -o"')
 
-    expect(response).to eq(response_type: :structured,
-                           test_results: [],
-                           status: :passed,
-                           feedback: '',
-                           expectation_results: [],
-                           result: '')
+    expect(response).to eq(status: :passed,
+                           result: 'git version 2')
   end
 end
