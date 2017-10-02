@@ -14,6 +14,6 @@ bash
   end
 
   def command_line(filename)
-    "chmod u+x #{filename} && . #{filename}"
+    "runbash #{filename}"
   end
 end
