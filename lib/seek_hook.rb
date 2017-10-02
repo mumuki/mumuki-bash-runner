@@ -9,7 +9,7 @@ class BashSeekHook < Mumukit::Templates::FileHook
     <<bash
 #{r.extra}
     #{(r.cookie || []).join("\n")}
-echo $(#{r.query})
+#{r.query}
 bash
   end
 
