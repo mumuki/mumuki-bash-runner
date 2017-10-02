@@ -11,7 +11,7 @@ describe 'runner' do
   after(:all) { Process.kill 'TERM', @pid }
 
   it 'answers the right git version' do
-    response = bridge.run_query!(extra: '',
+    response = bridge.run_seek!(extra: '',
                                  content: '',
                                  query: 'git --version | grep "git version 2 -o"')
 

@@ -1,8 +1,8 @@
 require_relative './spec_helper'
 require 'ostruct'
 
-describe BashQueryHook do
-  let(:hook) { BashQueryHook.new(nil) }
+describe BashSeekHook do
+  let(:hook) { BashSeekHook.new(nil) }
   let(:file) { hook.compile(request) }
   let(:result) { hook.run!(file) }
 

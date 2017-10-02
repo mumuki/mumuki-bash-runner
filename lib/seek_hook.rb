@@ -1,4 +1,4 @@
-class BashQueryHook < Mumukit::Templates::FileHook
+class BashSeekHook < Mumukit::Templates::FileHook
   isolated true
 
   def tempfile_extension
@@ -6,9 +6,9 @@ class BashQueryHook < Mumukit::Templates::FileHook
   end
 
   def compile_file_content(r)
-<<bash
+    <<bash
 #{r.extra}
-#{(r.cookie || []).join("\n")}
+    #{(r.cookie || []).join("\n")}
 echo $(#{r.query})
 bash
   end
