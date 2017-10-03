@@ -8,7 +8,7 @@ class BashSeekHook < Mumukit::Templates::FileHook
   def compile_file_content(r)
     <<bash
 #{r.extra}
-    #{(r.cookie || []).join("\n")}
+#{(r.cookie || []).join("\n")}
 #{r.query}
 bash
   end
