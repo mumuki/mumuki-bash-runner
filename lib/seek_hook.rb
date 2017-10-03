@@ -14,6 +14,6 @@ bash
   end
 
   def command_line(filename)
-    "runbash #{filename}"
+    "bash #{filename}"
   end
 end
