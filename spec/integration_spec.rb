@@ -1,3 +1,4 @@
+require_relative './spec_helper'
 require 'mumukit/bridge'
 require 'active_support/all'
 
@@ -11,11 +12,13 @@ describe 'runner' do
   after(:all) { Process.kill 'TERM', @pid }
 
   it 'answers the right git version' do
-    response = bridge.run_seek!(extra: '',
-                                 content: '',
-                                 query: 'git --version | grep "git version 2 -o"')
+    response = bridge.run_try!(extra: '',
+                                content: '',
+                                query: 'git --version | grep "git version 2" -o',
+                                goal: { kind: 'query_outputs', query: 'echo something', output: 'something' })
 
     expect(response).to eq(status: :passed,
-                           result: 'git version 2')
+                           result: I18n.t(:goal_passed),
+                           query_result: { result: 'git version 2', status: :passed })
   end
 end

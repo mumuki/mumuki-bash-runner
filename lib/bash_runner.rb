@@ -1,5 +1,7 @@
 require 'mumukit'
 
+I18n.load_translations_path File.join(__dir__, 'locales', '*.yml')
+
 Mumukit.runner_name = 'bash'
 Mumukit.configure do |config|
   config.docker_image = 'mumuki/mumuki-bash-worker'

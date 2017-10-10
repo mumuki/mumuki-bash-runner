@@ -15,7 +15,7 @@ echo #{query_separator}
 #{r.query}
 echo $?
 echo #{goal_separator}
-#{r.goal.values.first[:query]}
+#{r.goal.with_indifferent_access[:query]}
 bash
   end
 
@@ -62,9 +62,9 @@ bash
       status: status
     }
 
-    checkResults = Bash::Checker.new.check(results, @goal)
+    check_results = @checker.check(results, @goal)
 
-    [checkResults[2], checkResults[1], results[:query]]
+    [check_results[2], check_results[1], results[:query]]
   end
 
   def to_query_result(query_result)
@@ -74,8 +74,8 @@ bash
   end
 
   def compile(request)
-    @goal = {name: request.goal.keys.first, postconditions: [[request.goal.keys.first, request.goal.values.first]]}
-    @request = request
+    @goal = {postconditions: [[request.goal.with_indifferent_access[:kind], request.goal]]}
+    @checker = Bash::Checker.new request
     super request
   end
 
