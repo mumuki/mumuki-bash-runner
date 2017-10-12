@@ -7,8 +7,9 @@ RUN apt-get update && \
 WORKDIR /home/mumuki/
 
 RUN groupadd mumuki-group
-RUN useradd mumuki-user
-RUN usermod -aG mumuki-group mumuki-user
+RUN useradd mumuki
+RUN usermod -aG mumuki-group mumuki
+
 RUN chmod o-x -R /bin/
 RUN chmod o-x -R /sbin/
 RUN chmod o-x -R /usr/bin/
@@ -27,4 +28,6 @@ RUN chmod o+x /usr/bin/git
 RUN chmod o+x /bin/grep
 
 RUN chmod o=rwx /home/mumuki/
-USER mumuki-user
+USER mumuki
+RUN git config --global user.name "mumukibot"
+RUN git config --global user.email "bot@mumuki.org"
