@@ -18,7 +18,7 @@ describe 'runner' do
                                 goal: { kind: 'query_outputs', query: 'echo something', output: 'something' })
 
     expect(response).to eq(status: :passed,
-                           result: I18n.t(:goal_passed),
+                           result: I18n.t('mumukit.interactive.goal_passed'),
                            query_result: { result: 'git version 2', status: :passed })
   end
 end
