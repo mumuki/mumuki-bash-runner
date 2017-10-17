@@ -1,4 +1,4 @@
-class BashTryHook < Mumukit::Templates::FileHook
+class BashTryHook < Mumukit::Templates::TryHook
   isolated true
 
   def tempfile_extension
@@ -23,10 +23,6 @@ bash
     "bash #{filename}"
   end
 
-  def result_sections
-    [:extras, :cookies, :current_query, :goal]
-  end
-
   def extra_separator
      '!!!MUMUKI-EXTRA-START!!!'
   end
@@ -43,7 +39,7 @@ bash
     '!!!MUMUKI-GOAL-START!!!'
   end
 
-  def post_process_file(file, result, status)
+  def post_process_file(_file, result, status)
     /#{extra_separator}
 ?(.*)
 #{cookie_separator}
@@ -55,28 +51,20 @@ bash
 /m =~ result
 
     results = {
-      extra: $1,
-      cookies: $2,
       query: to_query_result($3),
       goal: $4,
       status: status
     }
 
-    check_results = @checker.check(results, @goal)
+    check_results = check(results)
 
     [check_results[2], check_results[1], results[:query]]
   end
 
-  def to_query_result(query_result)
-    result, _, status = query_result.rpartition("\n")
+  def to_query_result(query_output)
+    result, _, status = query_output.rpartition("\n")
     status = status == '0' ? :passed : :failed
     {result: result, status: status}
-  end
-
-  def compile(request)
-    @goal = {postconditions: [[request.goal.with_indifferent_access[:kind], request.goal]]}
-    @checker = Bash::Checker.new request
-    super request
   end
 
 end
