@@ -1,3 +1,4 @@
+require_relative './spec_helper'
 require 'mumukit/bridge'
 require 'active_support/all'
 
@@ -10,17 +11,14 @@ describe 'runner' do
   end
   after(:all) { Process.kill 'TERM', @pid }
 
-  it 'sample test' do
-    response = bridge.run_tests!(test: '...',
-                                 extra: '...',
-                                 content: '...',
-                                 expectations: [])
+  it 'answers the right git version' do
+    response = bridge.run_try!(extra: '',
+                                content: '',
+                                query: 'git --version | grep "git version 2" -o',
+                                goal: { kind: 'query_outputs', query: 'echo something', output: 'something' })
 
-    expect(response).to eq(response_type: :structured,
-                           test_results: [],
-                           status: :passed,
-                           feedback: '',
-                           expectation_results: [],
-                           result: '')
+    expect(response).to eq(status: :passed,
+                           result: I18n.t('mumukit.interactive.goal_passed'),
+                           query_result: { result: 'git version 2', status: :passed })
   end
 end
