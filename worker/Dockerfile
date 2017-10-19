@@ -6,9 +6,7 @@ RUN apt-get update && \
 
 WORKDIR /home/mumuki/
 
-RUN groupadd mumuki-group
-RUN useradd mumuki
-RUN usermod -aG mumuki-group mumuki
+RUN useradd -U mumuki
 
 RUN chmod o-x -R /bin/
 RUN chmod o-x -R /sbin/
