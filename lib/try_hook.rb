@@ -67,4 +67,14 @@ bash
     {result: result, status: status}
   end
 
+  module Mumukit::WithTempfile
+    def with_tempfile
+      file = create_tempfile
+      puts %x{chmod o+r #{file.path}}
+      yield file
+      file.close
+      file
+    end
+  end
+
 end
