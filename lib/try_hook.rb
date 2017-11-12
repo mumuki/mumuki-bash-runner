@@ -39,7 +39,7 @@ bash
     '!!!MUMUKI-GOAL-START!!!'
   end
 
-  def post_process_file(_file, result, status)
+  def to_structured_results(_file, result, status)
     /#{extra_separator}
 ?(.*)
 #{cookie_separator}
@@ -49,16 +49,11 @@ bash
 #{goal_separator}
 ?(.*)
 /m =~ result
-
-    results = {
+    {
       query: to_query_result($3),
       goal: $4,
       status: status
     }
-
-    check_results = check(results)
-
-    [check_results[2], check_results[1], results[:query]]
   end
 
   def to_query_result(query_output)
