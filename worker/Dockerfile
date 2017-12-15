@@ -16,6 +16,7 @@ RUN chmod o+x /usr/bin/
 RUN chmod o+x /usr/bin/groups
 
 RUN chmod o+x /bin/
+RUN chmod o+x /bin/cp
 RUN chmod o+x /bin/bash
 RUN chmod o+x /bin/pwd
 RUN chmod o+x /bin/ls
