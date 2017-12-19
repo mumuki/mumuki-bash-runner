@@ -42,7 +42,7 @@ describe BashTryHook do
   end
 
   context 'try with last_query_equals goal' do
-    let(:goal) { { kind: 'last_query_equals', query: 'echo something' } }
+    let(:goal) { { kind: 'last_query_equals', value: 'echo something' } }
 
     context 'and query that matches' do
       let(:request) { struct query: 'echo something', goal: goal }
@@ -56,7 +56,7 @@ describe BashTryHook do
   end
 
   context 'try with last_query_matches goal' do
-    let(:goal) { { kind: 'last_query_matches', regex: /echo .*/ } }
+    let(:goal) { { kind: 'last_query_matches', regexp: /echo .*/ } }
 
     context 'and query that matches' do
       let(:request) { struct query: 'echo something', goal: goal }
