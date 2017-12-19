@@ -21,4 +21,31 @@ describe 'runner' do
                            result: I18n.t('mumukit.interactive.goal_passed'),
                            query_result: { result: 'git version 2', status: :passed })
   end
+
+  context 'supports last_query_equals' do
+    it 'passes when the query is ok and expected' do
+      response = bridge.run_try!(extra: '',
+                                 content: '',
+                                 query: 'ls',
+                                 cookie: ['touch hello'],
+                                 goal: { kind: 'last_query_equals', value: 'ls' })
+
+      expect(response).to eq(status: :passed,
+                             result: I18n.t('mumukit.interactive.goal_passed'),
+                             query_result: { result: 'hello', status: :passed })
+    end
+
+    it 'passes when the query is ok but unexpected expected' do
+      response = bridge.run_try!(extra: '',
+                                 content: '',
+                                 query: 'ls',
+                                 cookie: ['touch hello'],
+                                 goal: { kind: 'last_query_equals', value: 'ls -la' })
+
+      expect(response).to eq(status: :failed,
+                             result: "query should be 'ls -la' but was 'ls'",
+                             query_result: { result: 'hello', status: :passed })
+    end
+  end
+
 end
