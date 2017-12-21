@@ -8,7 +8,7 @@ rvm:
 services:
 - docker
 before_install:
-- docker pull mumuki/mumuki-bash-worker
+- docker pull mumuki/mumuki-bash-worker:1.1
 deploy:
   provider: rubygems
   api_key:
