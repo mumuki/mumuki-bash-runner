@@ -26,6 +26,7 @@ RUN chmod o+x /bin/touch
 RUN chmod o+x /bin/mkdir
 RUN chmod o+x /usr/bin/git
 RUN chmod o+x /bin/grep
+RUN chmod o+x /bin/sed
 
 RUN chmod o=rwx /home/mumuki/
 USER mumuki
