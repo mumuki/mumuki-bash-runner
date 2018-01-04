@@ -16,17 +16,23 @@ RUN chmod o+x /usr/bin/
 RUN chmod o+x /usr/bin/groups
 
 RUN chmod o+x /bin/
-RUN chmod o+x /bin/cp
-RUN chmod o+x /bin/mv
 RUN chmod o+x /bin/bash
-RUN chmod o+x /bin/pwd
-RUN chmod o+x /bin/ls
 RUN chmod o+x /bin/cat
-RUN chmod o+x /bin/touch
-RUN chmod o+x /bin/mkdir
-RUN chmod o+x /usr/bin/git
+RUN chmod o+x /bin/cp
 RUN chmod o+x /bin/grep
+RUN chmod o+x /bin/ln
+RUN chmod o+x /bin/ls
+RUN chmod o+x /bin/mkdir
+RUN chmod o+x /bin/mv
+RUN chmod o+x /bin/pwd
+RUN chmod o+x /bin/rm
+RUN chmod o+x /bin/rmdir
 RUN chmod o+x /bin/sed
+RUN chmod o+x /bin/touch
+RUN chmod o+x /usr/bin/git
+RUN chmod o+x /usr/bin/head
+RUN chmod o+x /usr/bin/tail
+RUN chmod o+x /usr/bin/wc
 
 RUN chmod o=rwx /home/mumuki/
 USER mumuki
