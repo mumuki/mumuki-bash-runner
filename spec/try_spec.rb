@@ -41,6 +41,12 @@ describe BashTryHook do
     it { expect(result[2][:result]).to eq "query1\nquery2" }
   end
 
+  context 'try with exit' do
+    let(:request) { struct query: 'exit', goal: goal }
+    it { expect(result[2][:result]).to eq "<nothing>" }
+    it { expect(result[1]).to eq :failed }
+  end
+
   context 'try with last_query_equals goal' do
     let(:goal) { { kind: 'last_query_equals', value: 'echo something' } }
 

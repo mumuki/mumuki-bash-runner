@@ -57,6 +57,8 @@ bash
   end
 
   def to_query_result(query_output)
+    return {result: "<nothing>", status: :failed} if query_output.nil?
+
     result, _, status = query_output.rpartition("\n")
     status = status == '0' ? :passed : :failed
     {result: result, status: status}
