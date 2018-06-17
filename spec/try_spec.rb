@@ -43,7 +43,7 @@ describe BashTryHook do
 
   context 'try with exit' do
     let(:request) { struct query: 'exit', goal: goal }
-    it { expect(result[2][:result]).to eq "No results" }
+    it { expect(result[2][:result]).to eq "<nothing>" }
     it { expect(result[1]).to eq :failed }
   end
 
