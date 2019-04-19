@@ -35,6 +35,14 @@ describe BashTryHook do
     it { expect(result[2][:status]).to eq :failed }
   end
 
+  context 'try with cd to invalid directory - multiple times' do
+    let(:request) { struct query: 'cat nonexistent_directory', goal: goal }
+    let(:results) { 5.times.map { hook.run! hook.compile(request) } }
+
+    it { expect(results.map { |it| it[2][:result] }).to all eq 'cat: nonexistent_directory: No such file or directory' }
+    it { expect(results.map { |it| it[2][:status] }).to all eq :failed }
+  end
+
   context 'try with multiline outputs' do
     let(:goal) { { query_outputs: { query: 'echo -e "goal1\ngoal2"', output: "goal1\ngoal2" } } }
     let(:request) { struct query: 'echo -e "query1\nquery2"', extra: 'echo -e "extra1\nextra2"', cookie: ['echo -e "cookie1\ncookie2"'], goal: goal }
