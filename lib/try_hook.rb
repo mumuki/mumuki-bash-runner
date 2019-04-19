@@ -6,7 +6,7 @@ class BashTryHook < Mumukit::Templates::TryHook
   end
 
   def compile_file_content(r)
-    <<bash
+    <<bash.split("\n").map { |it| "#{it} 2>&1" }.join("\n")
 echo #{extra_separator}
 #{r.extra}
 echo #{cookie_separator}
