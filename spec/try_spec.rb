@@ -37,7 +37,7 @@ describe BashTryHook do
 
   context 'try with cd to invalid directory - multiple times' do
     let(:request) { struct query: 'cat nonexistent_directory', goal: goal }
-    let(:results) { Array.new(5) { hook.run! hook.compile(request) } }
+    let(:results) { 5.times.map { hook.run! hook.compile(request) } }
 
     it { expect(results.map { |it| it[2][:result] }).to all eq 'cat: nonexistent_directory: No such file or directory' }
     it { expect(results.map { |it| it[2][:status] }).to all eq :failed }
