@@ -172,4 +172,9 @@ describe BashTryHook do
     end
   end
 
+  context 'heredocs don\'t break input' do
+    let(:request) { struct query: 'echo 123', extra: "cat <<BASH\nhello\nBASH", goal: goal }
+    it { expect(result[2][:result]).to eq '123' }
+    it { expect(result[2][:status]).to eq :passed }
+  end
 end

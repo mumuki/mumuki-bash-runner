@@ -6,17 +6,17 @@ class BashTryHook < Mumukit::Templates::TryHook
   end
 
   def compile_file_content(r)
-    <<bash.split("\n").map { |it| "#{it} 2>&1" }.join("\n")
-echo #{extra_separator}
-#{r.extra}
-echo #{cookie_separator}
-#{(r.cookie || []).join("\n")}
-echo #{query_separator}
-#{r.query}
-echo $?
-echo #{goal_separator}
-#{r.goal.with_indifferent_access[:query]}
-bash
+    <<~bash
+      (echo #{extra_separator}
+      #{r.extra}
+      echo #{cookie_separator}
+      #{(r.cookie || []).join("\n")}
+      echo #{query_separator}
+      #{r.query}
+      echo $?
+      echo #{goal_separator}
+      #{r.goal.with_indifferent_access[:query]}) 2>&1
+    bash
   end
 
   def command_line(filename)
