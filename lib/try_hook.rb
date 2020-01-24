@@ -76,7 +76,7 @@ class BashTryHook < Mumukit::Templates::TryHook
   end
 
   def default_allowed_commands
-    %w(whoami cat cp grep ln ls mkdir mv rm rmdir sed touch git head tail wc)
+    %w(cat cp git grep head ln ls mkdir mv rm rmdir sed tail touch wc whoami)
   end
 
   def allowed_commands
