@@ -21,7 +21,7 @@ class BashTryHook < Mumukit::Templates::TryHook
   end
 
   def command_line(filename)
-    ['runbash', allowed_commands, filename]
+    ['runbash', enabled_commands.join(' '), filename]
   end
 
   def extra_separator
@@ -80,6 +80,10 @@ class BashTryHook < Mumukit::Templates::TryHook
   end
 
   def allowed_commands
-    [@custom_allowed_commands.presence || default_allowed_commands, required_commands].join ' '
+    @custom_allowed_commands.presence || default_allowed_commands
+  end
+
+  def enabled_commands
+    [allowed_commands, required_commands].flatten
   end
 end
