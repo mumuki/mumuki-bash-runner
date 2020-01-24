@@ -1,0 +1,11 @@
+#!/bin/bash
+
+commands=$1
+user_content_file=$2
+
+for command in $commands
+do
+  chmod o+x $(type -p $command)
+done
+
+su -c "bash $user_content_file" mumuki
