@@ -6,7 +6,7 @@ class BashTryHook < Mumukit::Templates::TryHook
   end
 
   def compile_file_content(r)
-    @custom_allowed_commands = r.settings.try { |settings| settings['allowed_commands'] }
+    set_custom_allowed_commands! r
     <<~bash
       (echo #{extra_separator}
       #{r.extra}
@@ -85,5 +85,9 @@ class BashTryHook < Mumukit::Templates::TryHook
 
   def enabled_commands
     [allowed_commands, required_commands].flatten
+  end
+
+  def set_custom_allowed_commands!(r)
+    @custom_allowed_commands = r.settings.try { |settings| settings['allowed_commands'] }
   end
 end
