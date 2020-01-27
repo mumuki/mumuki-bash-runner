@@ -8,6 +8,12 @@ Mumukit.configure do |config|
   config.stateful = true
 end
 
+module BashRunner
+  REQUIRED_COMMANDS = %w(bash sh).freeze
+  DEFAULT_ENABLED_COMMANDS = %w(cat cp git head ls mkdir mv sed tail touch).freeze
+  ALLOWED_COMMANDS = %w(awk cat cp git grep head ln ls mkdir mv rm rmdir sed tac tail touch wc whoami).freeze
+end
+
 require_relative './version_hook'
 require_relative './metadata_hook'
 require_relative './try_hook'
