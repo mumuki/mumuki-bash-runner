@@ -179,7 +179,7 @@ describe BashTryHook do
   end
 
   context 'when request specifies allowed commands' do
-    let(:request) { struct query: query, extra: 'echo something > foo.txt', goal: goal, settings: { 'allowed_commands' => ['cat'] } }
+    let(:request) { struct query: query, extra: 'echo something > foo.txt', goal: goal, settings: { 'enabled_commands' => ['cat'] } }
 
     context 'specified commands are allowed' do
       let(:query) { 'cat foo.txt' }
