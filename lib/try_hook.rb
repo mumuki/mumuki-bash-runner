@@ -6,6 +6,7 @@ class BashTryHook < Mumukit::Templates::TryHook
   end
 
   def compile_file_content(r)
+    set_custom_allowed_commands! r
     <<~bash
       (echo #{extra_separator}
       #{r.extra}
@@ -20,7 +21,7 @@ class BashTryHook < Mumukit::Templates::TryHook
   end
 
   def command_line(filename)
-    "bash #{filename}"
+    ['runbash', available_commands.join(' '), filename]
   end
 
   def extra_separator
@@ -70,4 +71,15 @@ class BashTryHook < Mumukit::Templates::TryHook
     file
   end
 
+  def enabled_commands
+    (@custom_enabled_commands.presence || BashRunner::DEFAULT_ENABLED_COMMANDS) & BashRunner::ALLOWED_COMMANDS
+  end
+
+  def available_commands
+    [enabled_commands, BashRunner::REQUIRED_COMMANDS].flatten
+  end
+
+  def set_custom_allowed_commands!(r)
+    @custom_enabled_commands = r.settings.try { |settings| settings['enabled_commands'] }
+  end
 end

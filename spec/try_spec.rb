@@ -177,4 +177,22 @@ describe BashTryHook do
     it { expect(result[2][:result]).to eq '123' }
     it { expect(result[2][:status]).to eq :passed }
   end
+
+  context 'when request specifies allowed commands' do
+    let(:request) { struct query: query, extra: 'echo something > foo.txt', goal: goal, settings: { 'enabled_commands' => ['cat'] } }
+
+    context 'specified commands are allowed' do
+      let(:query) { 'cat foo.txt' }
+
+      it { expect(result[2][:result]).to eq 'something' }
+      it { expect(result[2][:status]).to eq :passed }
+    end
+
+    context 'other commands are disallowed' do
+      let(:query) { 'ls' }
+
+      it { expect(result[2][:result]).to include 'Permission denied' }
+      it { expect(result[2][:status]).to eq :failed }
+    end
+  end
 end

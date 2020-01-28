@@ -14,12 +14,10 @@ describe 'runner' do
   it 'answers the right git version' do
     response = bridge.run_try!(extra: '',
                                 content: '',
-                                query: 'git --version | grep "git version 2" -o',
-                                goal: { kind: 'query_outputs', query: 'echo something', output: 'something' })
+                                query: 'git --version',
+                                goal: { kind: 'last_query_output_includes', output: 'git version 2' })
 
-    expect(response).to eq(status: :passed,
-                           result: I18n.t('mumukit.interactive.goal_passed'),
-                           query_result: { result: 'git version 2', status: :passed })
+    expect(response[:status]).to eq(:passed)
   end
 
   context 'supports last_query_equals' do
