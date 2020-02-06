@@ -8,8 +8,8 @@ WORKDIR /home/mumuki/
 
 RUN useradd -U mumuki
 
-RUN git config --global user.name "mumukibot"
-RUN git config --global user.email "bot@mumuki.org"
+RUN git config --system user.name "mumukibot"
+RUN git config --system user.email "bot@mumuki.org"
 
 RUN chmod o-x -R /bin/
 RUN chmod o-x -R /sbin/
