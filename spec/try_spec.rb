@@ -195,4 +195,11 @@ describe BashTryHook do
       it { expect(result[2][:status]).to eq :failed }
     end
   end
+
+  context 'git commit works' do
+    let(:goal) { { kind: 'last_query_output_includes', output: '1 file changed, 0 insertions(+), 0 deletions' } }
+
+    let(:request) { struct cookie: ['git init', 'touch foo', 'git add foo'], query: 'git commit -m \"bar\"', goal: goal }
+    it { expect(result[1]).to eq :passed }
+  end
 end
