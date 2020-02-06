@@ -8,7 +8,8 @@ rvm:
 services:
 - docker
 before_install:
-- ./bin/pull_worker.sh
+  - ./bin/pull_worker.sh
+  - gem install bundler
 deploy:
   provider: rubygems
   api_key:
