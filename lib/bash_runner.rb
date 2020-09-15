@@ -6,6 +6,7 @@ Mumukit.runner_name = 'bash'
 Mumukit.configure do |config|
   config.docker_image = 'mumuki/mumuki-bash-worker:1.4'
   config.stateful = true
+  config.setting = true
 end
 
 module BashRunner
